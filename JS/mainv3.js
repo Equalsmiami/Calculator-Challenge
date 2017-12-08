@@ -40,10 +40,16 @@ $('.button>div').on('click', function() {
       }
       completedEquation = false;
       break;
+
     case 'operator':
       if (!calc.v2) {
         // Current calculation's operator
         calc.v1 = screenText;
+        var operatorString = $(this).attr('data-operator');
+        calc.op = operatorString;
+      } else if ((calc.v1 && calc.v2) && calc.op) {
+        // case scenario for if user is attempting a continual operation (Ex. 9 + 9 + 9)
+        calculateResult();
         var operatorString = $(this).attr('data-operator');
         calc.op = operatorString;
       } else {
@@ -51,6 +57,8 @@ $('.button>div').on('click', function() {
         calculateResult();
       }
       break;
+
+
     case 'sqrt':
       var numberProcessed = calc.v2 ? calc.v2 : calc.v1;
       setCalcToInit(numberProcessed);
