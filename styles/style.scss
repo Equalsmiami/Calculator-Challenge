@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito:600|VT323');
+
+@mixin shadow($default...) {
+  -webkit-box-shadow: $default;
+  -moz-box-shadow: $default;
+  box-shadow: $default;
+}
+
+@mixin no-select() {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* IE/Edge */
+  user-select: none;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: Nunito, Helvetica, Arial, sans-serif;
+  @include no-select();
+}
+
+@mixin trans($property...) {
+  -o-transition: $property;
+  -ms-transition: $property;
+  -moz-transition: $property;
+  -webkit-transition: $property;
+  transition: $property;
+  -webkit-transition-timing-function: ease-out; /* Safari and Chrome */
+  transition-timing-function: ease-out;
+}
+
+input:focus {
+  outline:0;
+  background-color: lighten(#CAFEFE, 5%);
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+.calc-container {
+  padding: 1em;
+  margin: auto;
+  max-width: 30em;
+}
+
+.calc {
+  background: #CFCED3;
+  border-radius: 2em;
+  overflow: hidden;
+  padding: 2.5em 2em;
+  @include shadow(inset 0 -10px 10px rgba(0,0,0,.1));
+}
+
+.screen {
+  background-color: lighten(#CAFEFE, 8%);
+  font-family: VT323;
+  color: rgba(#000, .5);
+  height: 2em;
+  padding: 0 .7em;
+  border-radius: 1em;
+  vertical-align: middle;
+  line-height: 2em;
+  font-size: 2.4em;
+  text-align: right;
+  overflow: hidden;
+  border: none;
+  display: block;
+}
+
+.keyboard {
+  margin-top: 2em;
+}
+
+.button {
+  display: inline-block;
+  width: 25%;
+  padding: .6em .3em 0;
+  > div {
+    cursor: pointer;
+    background: #A7A4DD;
+    height: 2.8em;
+    border-radius: 2em;
+    vertical-align: middle;
+    line-height: 2.8em;
+    color: rgba(#fff, .7);
+    text-align: center;
+    font-size: 1.5em;
+    @include shadow(inset 0 -10px 10px rgba(0,0,0,.1));
+    @include trans(.1s);
+    &:hover {
+      background: darken(#A7A4DD, 7%);
+    }
+  }
+  &.equals > div {
+    background: #5D3996;
+    &:hover {
+      background: darken(#5D3996, 7%);
+    }
+  }
+  &.number > div {
+    background: #5A5A5A;
+    &:hover {
+      background: darken(#5A5A5A, 7%);
+    }
+  }
+}
