@@ -1,7 +1,4 @@
-var cookieHistory = "";
 var calcHistory =[];
-var variables = [];
-var operations = [];
 var calc = { v1: 0, v2: null, op: null };
 var cookieHistoryString = (Cookies.get('calcHistory'));
 if (cookieHistoryString == undefined) {
