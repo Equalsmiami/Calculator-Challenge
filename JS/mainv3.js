@@ -6,8 +6,9 @@ if (cookieHistoryString == undefined) {
 } else {
   cookieHistory = JSON.parse(cookieHistoryString);
 }
-
 var completedEquation = false;
+
+
 // Switch statment to interpret what action should be taken Ei. an operator, a number, or action is clicked.
 $('.button>div').on('click', function() {
   var screenText = $('.screen').text();
@@ -17,7 +18,6 @@ $('.button>div').on('click', function() {
       if (!calc.op) {
         // First variable
         if ((screenText == 0 || completedEquation)) {
-        //if ((screenText == 0 || completedEquation) && screenText != '0.') {
           $('.screen').text(numberPressed);
         } else {
           $('.screen').append(numberPressed);
@@ -50,7 +50,7 @@ $('.button>div').on('click', function() {
         var operatorString = $(this).attr('data-operator');
         calc.op = operatorString;
       } else {
-        // Next operation's operator
+        // user engaged operator multiple times, calculate results for user instead.
         calculateResult();
       }
       break;
@@ -62,6 +62,7 @@ $('.button>div').on('click', function() {
       calc.op = 'sqrt';
       calculateResult();
       break;
+
     case 'point':
       if (!calc.v2) {
         // Modifying screen (working on v1)
@@ -77,16 +78,19 @@ $('.button>div').on('click', function() {
         $('.screen').append('.');
       }
       break;
+
     case 'clear':
       $('.screen').text(0);
       setCalcToInit(0);
       break;
+
     case 'memory':
       var prevResult = calcHistory.length == 0 ? 0 : calcHistory.pop();
       setCalcToInit(prevResult);
       $('.screen').text(prevResult);
       saveHistory();
       break;
+
     case 'equals':
       if (calc.v2) {
         completedEquation = true;
@@ -97,8 +101,12 @@ $('.button>div').on('click', function() {
       }
       break;
   }
-  console.log('\n\ncalc');
-  console.log(calc);
+
+  // For testing uncomment the lines below
+
+  // console.log('\n\ncalc');
+  // console.log(calc);
+
 });
 
 function calculateResult() {
@@ -134,8 +142,9 @@ function calculateResult() {
   $('.screen').text(finalSolution);
   setCalcToInit(finalSolution);
   saveHistory();
-  console.log('\n\ncalcHistory');
-  console.log(calcHistory);
+  // uncomment these lines for testing
+  // console.log('\n\ncalcHistory');
+  // console.log(calcHistory);
 }
 
 function setCalcToInit(v1) {
